@@ -28,6 +28,8 @@ RUN cd /usr/local/jmeter && wget -O jmeter-plugins-extraslibs.zip https://jmeter
 RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local/jmeter/bin/user.properties \
     && echo "jmeter.save.saveservice.thread_counts=true" >> /usr/local/jmeter/bin/user.properties
 
+ENV JVM_ARGS=-"Duser.language=en -Duser.region=EN"
+
 USER jmeter
 
 WORKDIR /usr/local/jmeter
