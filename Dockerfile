@@ -16,10 +16,9 @@ RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins.zip https://jmeter-pl
     && unzip -n jmeter-plugins.zip \
     && rm jmeter-plugins.zip
 
-    RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins-lib.zip https://jmeter-plugins.org/downloads/file/JMeterPlugins-libs-${JMETER_PLUGIN_VERSION}.zip \
-        && unzip -n jmeter-plugins-lib.zip \
-        && rm jmeter-plugins-lib.zip
-
+RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins-lib.zip https://jmeter-plugins.org/downloads/file/JMeterPlugins-libs-${JMETER_PLUGIN_VERSION}.zip \
+    && unzip -n jmeter-plugins-lib.zip \
+    && rm jmeter-plugins-lib.zip
 
 ####
 ## Configuration
