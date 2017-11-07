@@ -1,6 +1,6 @@
 FROM exoplatform/base-jdk:jdk8
 
-ARG JMETER_VERSION=2.7
+ARG JMETER_VERSION=2.13
 ARG JMETER_PLUGIN_VERSION=0.5.3
 
 # RUN apt-get update && apt-get install
