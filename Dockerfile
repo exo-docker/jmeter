@@ -1,7 +1,7 @@
 FROM exoplatform/base-jdk:jdk8
 
 ARG JMETER_VERSION=2.13
-ARG JMETER_PLUGIN_VERSION=0.5.3
+ARG JMETER_PLUGIN_VERSION=1.0.0
 
 # RUN apt-get update && apt-get install
 RUN groupadd --gid 1000 jmeter && useradd --gid 1000 --uid 1000 -d /usr/local/jmeter jmeter
