@@ -23,11 +23,10 @@ RUN cd /usr/local/jmeter && wget -O jmeter-plugins-extraslibs.zip https://jmeter
     && unzip -n jmeter-plugins-extraslibs.zip \
     && rm jmeter-plugins-extraslibs.zip
 
-#RUN chmod u+x /usr/local/jmeter/bin/*.sh
-
-#RUN wget https://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-1.4.0.zip && unzip -n JMeterPlugins-Standard-1.4.0.zip \
-#    && wget https://jmeter-plugins.org/downloads/file/JMeterPlugins-Extras-1.4.0.zip && unzip -n JMeterPlugins-Extras-1.4.0.zip \
-#    && wget https://jmeter-plugins.org/downloads/file/JMeterPlugins-ExtrasLibs-1.4.0.zip && unzip -n JMeterPlugins-ExtrasLibs-1.4.0.zip
+####
+## Configuration
+RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local/jmeter/bin/user.properties \
+    && echo "jmeter.save.saveservice.thread_counts=true" >> /usr/local/jmeter/bin/user.properties
 
 USER jmeter
 
