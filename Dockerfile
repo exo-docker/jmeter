@@ -23,6 +23,9 @@ RUN cd /usr/local/jmeter && wget -O jmeter-plugins-extraslibs.zip https://jmeter
     && unzip -n jmeter-plugins-extraslibs.zip \
     && rm jmeter-plugins-extraslibs.zip
 
+COPY entrypoint.sh /
+RUN chmod a+x /entrypoint.sh
+
 ####
 ## Configuration
 RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local/jmeter/bin/user.properties \
@@ -34,4 +37,4 @@ USER jmeter
 
 WORKDIR /usr/local/jmeter
 
-ENTRYPOINT ["/usr/local/jmeter/bin/jmeter"]
+ENTRYPOINT ["/entrypoint.sh"]
