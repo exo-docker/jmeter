@@ -1,7 +1,7 @@
 FROM exoplatform/base-jdk:jdk8
 
 ARG JMETER_VERSION=2.13
-ARG JMETER_PLUGIN_VERSION=1.0.0
+ARG JMETER_PLUGIN_VERSION=1.1.0
 
 # RUN apt-get update && apt-get install
 RUN groupadd --gid 1000 jmeter && useradd --gid 1000 --uid 1000 -d /usr/local/jmeter jmeter
@@ -12,9 +12,14 @@ RUN cd /usr/local && wget -O jmeter.tgz https://archive.apache.org/dist/jmeter/b
 
 WORKDIR /usr/local/jmeter
 
-RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugin.zip https://jmeter-plugins.org/downloads/file/JMeterPlugins-${JMETER_PLUGIN_VERSION}.zip \
-    && unzip -n jmeter-plugin.zip \
-    && rm jmeter-plugin.zip
+RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins.zip https://jmeter-plugins.org/downloads/file/JMeterPlugins-${JMETER_PLUGIN_VERSION}.zip \
+    && unzip -n jmeter-plugins.zip \
+    && rm jmeter-plugins.zip
+
+    RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins-lib.zip https://jmeter-plugins.org/downloads/file/JMeterPlugins-libs-${JMETER_PLUGIN_VERSION}.zip \
+        && unzip -n jmeter-plugins-lib.zip \
+        && rm jmeter-plugins-lib.zip
+
 
 #RUN chmod u+x /usr/local/jmeter/bin/*.sh
 
