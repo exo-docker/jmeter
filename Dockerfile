@@ -1,4 +1,5 @@
-FROM exoplatform/base-jdk:jdk8
+FROM    exoplatform/base-jdk:jdk8
+LABEL   maintainer="eXo Platform <docker@exoplatform.com>"
 
 ARG JMETER_VERSION=3.3
 
