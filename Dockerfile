@@ -21,11 +21,21 @@ RUN cd /usr/local/jmeter/lib/ext && wget -O jmeter-plugins-lib.zip https://jmete
     && unzip -n jmeter-plugins-lib.zip \
     && rm jmeter-plugins-lib.zip
 
+# Install entrypoint
+COPY entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
+
 ####
 ## Configuration
 RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local/jmeter/bin/user.properties \
     && echo "jmeter.save.saveservice.thread_counts=true" >> /usr/local/jmeter/bin/user.properties
 
+ENV JVM_ARGS="-Duser.language=en -Duser.region=EN"
+
 USER jmeter
 
-ENTRYPOINT ["/usr/local/jmeter/bin/jmeter"]
+WORKDIR /usr/local/jmeter
+
+ENV JMETER_PROPERTY_PREFIX=JMETERPROP_
+
+ENTRYPOINT ["/entrypoint.sh"]
