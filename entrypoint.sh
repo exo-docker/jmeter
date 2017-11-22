@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 # WARNING Not supporting spaces
-PROPERTIES=$(env | grep "^${JMETER_PROPERTY_PREFIX}")
+PROPERTIES=$(env | grep "^${JMETER_PROPERTY_PREFIX:-NOT_EXISTS}" || true)
 
 PROPERTIES_STRING=""
 for i in ${PROPERTIES}
