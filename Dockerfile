@@ -18,15 +18,21 @@ RUN cd /usr/local/jmeter && wget -O plugin.zip https://jmeter-plugins.org/files/
 # Install Custom Thread Group 2.4
 RUN cd /usr/local/jmeter && wget -O plugin.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.4.zip && unzip plugin.zip && rm plugin.zip
 
+# Install entrypoint
+COPY entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
+
 ####
 ## Configuration
 RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local/jmeter/bin/user.properties \
     && echo "jmeter.save.saveservice.thread_counts=true" >> /usr/local/jmeter/bin/user.properties
 
-ENV JVM_ARGS=-"Duser.language=en -Duser.region=EN"
+ENV JVM_ARGS="-Duser.language=en -Duser.region=EN"
 
 USER jmeter
 
 WORKDIR /usr/local/jmeter
 
-ENTRYPOINT ["/usr/local/jmeter/bin/jmeter"]
+ENV JMETER_PROPERTY_PREFIX=JMETERPROP_
+
+ENTRYPOINT ["/entrypoint.sh"]
