@@ -9,7 +9,13 @@ ARG JMETER_VERSION=2.13
 ARG JMETER_PLUGIN_VERSION=1.1.0
 
 # Install GOSU
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN set -ex \
+    && ( \
+        gpg --keyserver ha.pool.sks-keyservers.net  --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+        || gpg --keyserver pgp.mit.edu              --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+        || gpg --keyserver keyserver.pgp.com        --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    )
+
 RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture)" \
     && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture).asc" \
     && gpg --verify /usr/local/bin/gosu.asc \
