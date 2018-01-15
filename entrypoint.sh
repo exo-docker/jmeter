@@ -7,6 +7,8 @@ USER_NAME=${LOCAL_USER_NAME:-jmeter}
 echo "Starting with UID=$USER_ID($USER_NAME)"
 useradd --shell /bin/bash -u $USER_ID -o -c "" -m $USER_NAME
 
+JMETER_CMD=${JMETER_CMD:-/usr/local/jmeter/bin/jmeter}
+
 # allow starting the container with bash (for Docker image debuging purpose)
 if [[ ${@:-nothing} == bash* ]]; then
     shift # we remove bash from the arguments
@@ -26,5 +28,5 @@ else
         echo Executing with additional properties : ${PROPERTIES_STRING}
     fi
 
-    exec /usr/local/bin/gosu $USER_NAME /usr/local/jmeter/bin/jmeter ${PROPERTIES_STRING} "$@"
+    exec /usr/local/bin/gosu $USER_NAME ${JMETER_CMD} ${PROPERTIES_STRING} "$@"
 fi
