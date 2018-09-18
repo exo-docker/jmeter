@@ -51,7 +51,7 @@ RUN echo "# This switch is needed for some JMeter Plugins reports" >> /usr/local
     && echo "jmeter.save.saveservice.thread_counts=true" >> /usr/local/jmeter/bin/user.properties \
     && echo "jmeter.save.saveservice.output_format=xml" >> /usr/local/jmeter/bin/user.properties
 
-ENV JVM_ARGS="-Duser.language=en -Duser.region=EN"
+ENV JVM_ARGS="-Duser.language=en -Duser.region=EN -XX:+UseG1GC"
 
 ENV JMETER_PROPERTY_PREFIX=JMETERPROP_
 
